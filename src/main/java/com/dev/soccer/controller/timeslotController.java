@@ -1,5 +1,6 @@
 package com.dev.soccer.controller;
 
+import com.dev.soccer.DTO.requests.timeslotRequest;
 import com.dev.soccer.model.timeslot;
 import com.dev.soccer.service.timeslotService;
 import org.springframework.http.ResponseEntity;

@@ -9,20 +9,18 @@ import java.math.BigDecimal;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-public class timeslotRequest {
-    private week_days timeslot_day;
+public record timeslotRequest (
+    week_days timeslot_day,
 
-    private Time timeslot_hour;
+    Time timeslot_hour,
 
-    private Long client_id;
+    Long client_id,
 
-    private BigDecimal price;
+    BigDecimal price,
 
-    private String status;
+    String status,
 
-    private Boolean paid;
+    Boolean paid,
 
-    private LocalDateTime cancel_date;
-}
+    LocalDateTime cancel_date
+){}
