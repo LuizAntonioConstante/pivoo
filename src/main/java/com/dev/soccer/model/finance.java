@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,11 +27,12 @@ public class finance {
 
     public LocalDateTime paidreceived_date;
 
+    @CreationTimestamp
     public LocalDateTime create_date;
 
     public LocalDateTime remove_date;
 
-    public BigDecimal amout;
+    public BigDecimal amount;
 
     public LocalDate due_date;
 

@@ -25,7 +25,7 @@ public class timeslotService {
     @Transactional
     public timeslot savetimeslot(timeslotRequest request){
 
-        client client = clientRepository.findById(request.client_id())
+        client client = clientRepository.findById(request.id_client())
                 .orElseThrow(() ->
                         new IllegalArgumentException("Client Not Found")
                 );

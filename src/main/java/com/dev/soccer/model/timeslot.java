@@ -27,7 +27,7 @@ public class timeslot {
     public Time timeslot_hour;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "id_client")
     public client client;
 
     public BigDecimal price;

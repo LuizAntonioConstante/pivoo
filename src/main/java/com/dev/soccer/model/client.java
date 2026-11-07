@@ -31,7 +31,7 @@ public class client {
 
     public String phone2;
 
-    public String adress;
+    public String address;
 
     public String cpf_cnpj;
 
