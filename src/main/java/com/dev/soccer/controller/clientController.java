@@ -4,10 +4,9 @@ import com.dev.soccer.DTO.requests.clientRequest;
 import com.dev.soccer.model.client;
 import com.dev.soccer.service.clientService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/client")
@@ -27,6 +26,15 @@ public class clientController {
         client client = clientService.saveclient(request);
 
         return ResponseEntity.ok(client);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<client>> getClients() {
+
+        List<client> clients = clientService.findAllClients();
+
+        return ResponseEntity.ok(clients);
+
     }
 
 }
