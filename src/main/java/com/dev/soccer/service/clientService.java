@@ -34,4 +34,9 @@ public class clientService {
         return clientRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public client getClientById(long id){
+
+        return clientRepository.findById(id).orElseThrow();
+    }
 }

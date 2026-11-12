@@ -37,4 +37,13 @@ public class clientController {
 
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getClientById(@PathVariable("id") long id) {
+
+        client client = clientService.getClientById(id);
+
+        return ResponseEntity.ok(client);
+
+    }
+
 }
