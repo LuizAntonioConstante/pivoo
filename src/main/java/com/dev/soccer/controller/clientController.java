@@ -28,8 +28,8 @@ public class clientController {
         return ResponseEntity.ok(client);
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<List<client>> getClients() {
+    @GetMapping("/list")
+    public ResponseEntity<List<client>> listClients() {
 
         List<client> clients = clientService.findAllClients();
 

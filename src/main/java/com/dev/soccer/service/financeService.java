@@ -11,7 +11,9 @@ import com.dev.soccer.model.finance;
 import com.dev.soccer.model.planningfinance;
 import com.dev.soccer.model.timeslot;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class financeService {
 
     private final financeRepository financeRepository;
