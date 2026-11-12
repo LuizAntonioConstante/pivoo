@@ -4,8 +4,10 @@ import com.dev.soccer.DTO.requests.clientRequest;
 import com.dev.soccer.Mapper.clientMapper;
 import com.dev.soccer.Repository.clientRepository;
 import com.dev.soccer.model.client;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,6 +30,21 @@ public class clientService {
         return clientRepository.save(clientfinal);
     }
 
+    @Transactional
+    public void deleteClient(Long id){
+
+        boolean exists = clientRepository.existsById(id);
+        if(exists){
+            clientRepository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Client not found"
+            );
+        }
+    }
+
     @Transactional(readOnly = true)
     public List<client> findAllClients(){
 
@@ -35,7 +52,10 @@ public class clientService {
     }
 
     @Transactional(readOnly = true)
-    public client getClientById(long id){
+    public client getClientById(Long id){
+
+        System.out.println("Buscando cliente ID: " + id);
+        System.out.println("Existe? " + clientRepository.existsById(id));
 
         return clientRepository.findById(id).orElseThrow();
     }

@@ -28,6 +28,15 @@ public class clientController {
         return ResponseEntity.ok(client);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") long id){
+
+        clientService.deleteClient(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
     @GetMapping("/list")
     public ResponseEntity<List<client>> listClients() {
 
@@ -45,5 +54,7 @@ public class clientController {
         return ResponseEntity.ok(client);
 
     }
+
+
 
 }
