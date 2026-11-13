@@ -4,7 +4,7 @@ services:
     image: postgres:17
     mem_limit: 1g
     cpus: 2.0
-    container_name: soccer_postgres
+    container_name: pivoo_postgres
     restart: "no"
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -25,7 +25,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: soccer_java
+    container_name: pivoo_java
     restart: "no"
     depends_on:
       postgres:

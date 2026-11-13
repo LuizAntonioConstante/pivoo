@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dev</groupId>
-	<artifactId>soccer</artifactId>
+	<artifactId>pivoo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>pivoo</name>
+	<description>Sports facility management system</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -1,10 +1,10 @@
 [**English**](README.md) | [Português (Brasil)](README.pt-BR.md)
 
-# Soccer Project
+# Pivoo
 
 A work-in-progress management system for soccer field rental businesses.
 
-The idea behind Soccer Project is simple: make it easier to keep track of customers, field bookings and the money coming in and out of a soccer facility. I'm building it step by step, starting with a Java backend and a PostgreSQL database. Over time, I want to turn it into a practical tool that can be used in day-to-day operations, not just a demo application.
+The idea behind Pivoo is simple: make it easier to keep track of customers, field bookings and the money coming in and out of a soccer facility. I'm building it step by step, starting with a Java backend and a PostgreSQL database. Over time, I want to turn it into a practical tool that can be used in day-to-day operations, not just a demo application.
 
 This is also a personal project where I'm learning Java, object-oriented programming, Spring Boot and backend development by putting them into practice.
 
@@ -128,7 +128,7 @@ This project started from my desire to learn Java through hands-on experience wh
 
 The idea is to build a system that makes day-to-day operations easier, starting with customer management and field reservations, with the possibility of adding new features as the business needs evolve.
 
-I'm developing Soccer Project step by step, using each stage to learn more about the technologies involved and better understand the decisions behind the code. Both the system and its documentation will continue to evolve as the project progresses.
+I'm developing Pivoo step by step, using each stage to learn more about the technologies involved and better understand the decisions behind the code. Both the system and its documentation will continue to evolve as the project progresses.
 
 ---
 

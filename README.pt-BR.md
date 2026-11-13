@@ -1,10 +1,10 @@
 [English](README.md) | [**Português (Brasil)**](README.pt-BR.md)
 
-# Soccer Project
+# Pivoo
 
 Um sistema de gestão para estabelecimentos que alugam campos de futebol, ainda em desenvolvimento.
 
-A ideia do Soccer Project é simples: facilitar o controle de clientes, reservas de horários e movimentações financeiras de um campo de futebol. Estou construindo o sistema aos poucos, começando por uma API em Java e um banco de dados PostgreSQL. Meu objetivo é que, com o tempo, ele se torne uma ferramenta útil para a rotina de um estabelecimento, e não apenas um projeto de demonstração.
+A ideia do Pivoo é simples: facilitar o controle de clientes, reservas de horários e movimentações financeiras de um campo de futebol. Estou construindo o sistema aos poucos, começando por uma API em Java e um banco de dados PostgreSQL. Meu objetivo é que, com o tempo, ele se torne uma ferramenta útil para a rotina de um estabelecimento, e não apenas um projeto de demonstração.
 
 Este também é um projeto pessoal em que estou aprendendo Java, programação orientada a objetos, Spring Boot e desenvolvimento backend na prática.
 
@@ -128,7 +128,7 @@ Esse projeto surgiu da vontade de aprender Java na prática e, ao mesmo tempo, a
 
 A ideia é desenvolver um sistema que facilite a rotina do estabelecimento, começando pelo cadastro de clientes e gerenciamento de reservas, com a possibilidade de adicionar novas funcionalidades conforme as necessidades do negócio.
 
-Estou desenvolvendo o Soccer Project aos poucos, aproveitando cada etapa para aprender mais sobre as tecnologias utilizadas e entender melhor as decisões por trás do código. Tanto o sistema quanto sua documentação vão evoluir ao longo do projeto.
+Estou desenvolvendo o Pivoo aos poucos, aproveitando cada etapa para aprender mais sobre as tecnologias utilizadas e entender melhor as decisões por trás do código. Tanto o sistema quanto sua documentação vão evoluir ao longo do projeto.
 
 ---
 
