@@ -56,6 +56,24 @@ public class clientController {
 
     }
 
+    @GetMapping("/list/active")
+    public ResponseEntity<List<client>> listActiveClients() {
+
+        List<client> clients = clientService.findActiveClients();
+
+        return ResponseEntity.ok(clients);
+
+    }
+
+    @GetMapping("/list/inactive")
+    public ResponseEntity<List<client>> listInactiveClients() {
+
+        List<client> clients = clientService.findInactiveClients();
+
+        return ResponseEntity.ok(clients);
+
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getClientById(@PathVariable("id") Long id) {
 

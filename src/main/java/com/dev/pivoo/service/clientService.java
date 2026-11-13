@@ -66,6 +66,18 @@ public class clientService {
     }
 
     @Transactional(readOnly = true)
+    public List<client> findActiveClients(){
+
+        return clientRepository.findActiveClients();
+    }
+
+    @Transactional(readOnly = true)
+    public List<client> findInactiveClients(){
+
+        return clientRepository.findInactiveClients();
+    }
+
+    @Transactional(readOnly = true)
     public client getClientById(Long id){
 
         return clientRepository.findById(id).orElseThrow();
