@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -45,6 +46,19 @@ public class clientService {
         }
     }
 
+    @Transactional
+    public client editClient(Long id, clientRequest request){
+
+        client editClient = clientRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Client not found")
+        );
+
+        clientMapper.updateEntity(editClient, request);
+
+        return clientRepository.save(editClient);
+    }
+
     @Transactional(readOnly = true)
     public List<client> findAllClients(){
 
@@ -54,9 +68,38 @@ public class clientService {
     @Transactional(readOnly = true)
     public client getClientById(Long id){
 
-        System.out.println("Buscando cliente ID: " + id);
-        System.out.println("Existe? " + clientRepository.existsById(id));
-
         return clientRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public client deactivateClient(Long id){
+
+        client editClient = clientRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Client not found")
+        );
+
+        if (editClient.getCancel_date() == null) {
+            editClient.setCancel_date(LocalDateTime.now());
+        }
+
+        return clientRepository.save(editClient);
+
+    }
+
+    @Transactional
+    public client reactivateClient(Long id){
+
+        client editClient = clientRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Client not found")
+        );
+
+        if (editClient.getCancel_date() != null) {
+            editClient.setCancel_date(null);
+        }
+
+        return clientRepository.save(editClient);
+
     }
 }

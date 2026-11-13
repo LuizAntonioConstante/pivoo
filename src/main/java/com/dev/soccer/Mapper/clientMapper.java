@@ -20,4 +20,35 @@ public class clientMapper {
 
         return client;
     }
+
+    public void updateEntity(client editClient, clientRequest request){
+
+        if (request.client_type() != null){
+            editClient.setClient_type(request.client_type());
+        }
+
+        if (request.name() != null){
+            editClient.setName(request.name());
+        }
+
+        if (request.phone1() != null){
+            editClient.setPhone1(request.phone1());
+        }
+
+        if (request.phone2() != null){
+            editClient.setPhone2(request.phone2());
+        }
+
+        if (request.address() != null){
+            editClient.setAddress(request.address());
+        }
+
+        if (request.cpf_cnpj() != null){
+            editClient.setCpf_cnpj(request.cpf_cnpj());
+        }
+
+        if (request.mail() != null){
+            editClient.setMail(request.mail());
+        }
+    }
 }
