@@ -98,6 +98,14 @@ public class financeController {
         return ResponseEntity.ok(finances);
     }
 
+    @GetMapping("list/overdue")
+    public ResponseEntity<List<finance>> listOverdueFinances() {
+
+        List<finance> finances = financeService.findOverdueFinances();
+
+        return ResponseEntity.ok(finances);
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getFinanceById(@PathVariable("id") Long id) {
 

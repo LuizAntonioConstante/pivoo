@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -110,6 +111,12 @@ public class financeService {
     }
 
     @Transactional(readOnly = true)
+    public List<finance> findOverdueFinances(){
+
+        return financeRepository.findOverdueFinances(LocalDate.now());
+    }
+
+    @Transactional(readOnly = true)
     public finance getFinanceById(Long id){
 
         return financeRepository.findById(id).orElseThrow();
@@ -184,4 +191,5 @@ public class financeService {
 
         return financeRepository.save(editFinance);
     }
+
 }
