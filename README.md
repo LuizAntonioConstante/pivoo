@@ -1,70 +1,45 @@
-[**English**](README.md) | [Português (Brasil)](README.pt-BR.md)
+<div align="center">
 
-# Pivoo
+<!-- Add your logo at docs/images/logo.png, then uncomment the next line.
+<img src="docs/images/logo.png" alt="pivoo. logo" width="250">
+-->
 
-A work-in-progress management system for soccer field rental businesses.
+# pivoo.
 
-The idea behind Pivoo is simple: make it easier to keep track of customers, field bookings and the money coming in and out of a soccer facility. I'm building it step by step, starting with a Java backend and a PostgreSQL database. Over time, I want to turn it into a practical tool that can be used in day-to-day operations, not just a demo application.
+<a href="https://github.com/LuizAntonioConstante/pivoo/tags"><img src="https://img.shields.io/github/v/tag/LuizAntonioConstante/pivoo?style=for-the-badge&label=Latest%20Tag" alt="Latest tag"></a>
+<img src="https://img.shields.io/badge/Java-26-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 26">
+<a href="README.md"><img src="https://img.shields.io/badge/English-README-blue?style=for-the-badge" alt="English README"></a>
+<a href="README.pt-BR.md"><img src="https://img.shields.io/badge/Portugu%C3%AAs-BR-green?style=for-the-badge" alt="README em português"></a>
 
-This is also a personal project where I'm learning Java, object-oriented programming, Spring Boot and backend development by putting them into practice.
+</div>
 
-> **Status:** Under active development. The API is still evolving, and some features described below are plans rather than finished functionality.
+**pivoo.** is a management system for sports facilities, focused on making everyday operations easier to organize.
 
-## What I'm working on
+Inspired by the needs of a real soccer field rental business, the project aims to bring customer management, field bookings, recurring schedules, and accounts payable and receivable into one place.
 
-The current focus is the backend and the structure needed for customer management and field scheduling.
+Built with **Java, Spring Boot, and PostgreSQL**, pivoo. is also a hands-on software development project, evolving alongside the business needs.
 
-- **Customer management:** create customer records, list customers and find a customer by ID.
-- **Scheduling domain:** model available time slots, bookings and their relationship with customers.
-- **Financial domain:** lay the groundwork for tracking charges and payments.
+> **Status:** Under development.
 
-The customer routes I'm currently working with are:
+## Technologies
 
-| Method | Route | Purpose |
-| --- | --- | --- |
-| `POST` | `/api/client/save` | Create a customer |
-| `GET` | `/api/client/list` | List customers |
-| `GET` | `/api/client/get/{id}` | Find a customer by ID |
+- Java and Spring Boot
+- Spring Data JPA / Hibernate
+- PostgreSQL
+- Maven
+- Docker and Docker Compose
 
-These routes are still subject to change as I refine the API. Customer update and delete operations, as well as more complete error handling, are next steps—not features I consider finished yet.
+## Getting started
 
-## Where I want to take it
+### Option 1 — Docker Compose (recommended)
 
-My longer-term goal is a system that can handle more than bookings:
-
-- Manage field availability, reservations, cancellations and pricing.
-- Track payments, accounts payable and receivable.
-- Add a point-of-sale (POS) module for the facility's convenience store.
-- Eventually support products, stock and sales reports.
-- Make the system accessible from desktop and mobile devices.
-- Explore offline operation and data synchronization.
-
-**Offline support is a goal, not a current feature.** It will require additional work on local data storage and synchronization.
-
-## Tech stack
-
-- **Java 26** — version currently declared in `pom.xml`.
-- **Spring Boot 4.1.2** — application framework.
-- **Spring Web MVC** — HTTP endpoints.
-- **Spring Data JPA / Hibernate** — persistence and entity mapping.
-- **PostgreSQL** — relational database.
-- **Maven** — build and dependency management.
-- **Lombok** — less repetitive Java code.
-- **Docker / Docker Compose** — container configuration for the app and database.
-
-The project follows a layered approach: **Controller → Service → Repository → Database**, with DTOs and mappers used to organize data between layers.
-
-## Running locally
-
-### Option 1 — Docker Compose
-
-You'll need Docker with Compose support.
+**Requirements:** Git and Docker with Compose support.
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/LuizAntonioConstante/soccer_project.git
-   cd soccer_project
+   git clone https://github.com/LuizAntonioConstante/pivoo.git
+   cd pivoo
    ```
 
 2. Create a `.env` file in the project root:
@@ -78,19 +53,35 @@ You'll need Docker with Compose support.
 3. Build and start the containers:
 
    ```bash
-   docker compose up --build
+   docker compose up --build -d
    ```
 
-The Compose configuration maps the application to **port 8080** and PostgreSQL to **port 5433 on the host** (port 5432 inside the container).
+The API is available at `http://localhost:8080`. PostgreSQL is mapped to port `5433` on the host (`5432` inside Docker).
 
-> Keep `.env` out of Git. Docker Compose support is part of the project configuration, but the setup may change while development continues.
+Useful commands:
 
-### Option 2 — Java and PostgreSQL
+```bash
+docker compose logs -f app
+docker compose ps
+docker compose down
+```
 
-You'll need a JDK compatible with the project's configured Java version (**26** at the time of writing) and a running PostgreSQL instance.
+> Keep `.env` private; do not commit credentials to Git. Avoid `docker compose down -v` unless you intend to delete the database volume.
 
-1. Create a PostgreSQL database named `soccer` and a database user with access to it.
-2. Set the environment variables used by the application:
+### Option 2 — Run with Java and PostgreSQL
+
+**Requirements:** Git, PostgreSQL, and a JDK matching the version declared in `pom.xml` (currently Java 26).
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/LuizAntonioConstante/pivoo.git
+   cd pivoo
+   ```
+
+2. Create a PostgreSQL database named `soccer` and a user with access to it.
+
+3. Set these environment variables in your terminal or IDE (a local `.env` file is **not** automatically loaded by Spring Boot):
 
    ```dotenv
    DB_URL=jdbc:postgresql://localhost:5432/soccer
@@ -98,38 +89,32 @@ You'll need a JDK compatible with the project's configured Java version (**26** 
    DB_PASSWORD=your_database_password
    ```
 
-3. Start the application using the Maven Wrapper:
+4. Start the application using the Maven Wrapper:
 
-   **Linux/macOS:**
+   Linux/macOS:
+
    ```bash
    ./mvnw spring-boot:run
    ```
 
-   **Windows:**
+   Windows PowerShell:
+
    ```powershell
    .\mvnw.cmd spring-boot:run
    ```
 
-By default, the API runs on `http://localhost:8080`. The current JPA configuration uses `ddl-auto=update` for development, so Hibernate can create or update tables **after the database itself already exists**.
+The API is available at `http://localhost:8080`.
 
-### Quick test
+## Images
 
-Once the app is running and connected to the database, try:
+Screenshots and visual assets can be added to `docs/images/` as the project evolves.
 
-```http
-GET http://localhost:8080/api/client/list
-```
+<!-- Example: uncomment after adding a screenshot.
+![Application screenshot](docs/images/dashboard.png)
+-->
 
-An empty response (`[]`) is expected if no customers have been registered yet.
+## About
 
-## About this project
-
-This project started from my desire to learn Java through hands-on experience while helping a friend who is starting a soccer field rental business.
-
-The idea is to build a system that makes day-to-day operations easier, starting with customer management and field reservations, with the possibility of adding new features as the business needs evolve.
-
-I'm developing Pivoo step by step, using each stage to learn more about the technologies involved and better understand the decisions behind the code. Both the system and its documentation will continue to evolve as the project progresses.
-
----
+pivoo. began as a way to learn Java and backend development while creating something useful for a real business. Its goal is to grow into a practical, reliable tool for sports facility management.
 
 Developed by [Luiz Antônio Constante](https://github.com/LuizAntonioConstante).
