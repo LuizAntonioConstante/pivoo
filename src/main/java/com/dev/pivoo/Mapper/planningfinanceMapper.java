@@ -11,7 +11,15 @@ public class planningfinanceMapper {
         planningfinance planningfinance = new planningfinance();
 
         planningfinance.setPlanning(request.planning());
+        planningfinance.setRemove_date(request.exclude_date());
 
         return planningfinance;
+    }
+
+    public void updateEntity(planningfinance editPlanningfinance, planningfinanceRequest request){
+
+        if (request.planning() != null){
+            editPlanningfinance.setPlanning(request.planning());
+        }
     }
 }

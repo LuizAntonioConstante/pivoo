@@ -10,8 +10,13 @@ import com.dev.pivoo.model.client;
 import com.dev.pivoo.model.finance;
 import com.dev.pivoo.model.planningfinance;
 import com.dev.pivoo.model.timeslot;
-import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class financeService {
@@ -57,4 +62,89 @@ public class financeService {
         return financeRepository.save(financefinal);
 
     }
+
+    @Transactional
+    public void deleteFinance(Long id){
+
+        boolean exists = financeRepository.existsById(id);
+        if(exists){
+            financeRepository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Finance not found"
+            );
+        }
+    }
+
+    @Transactional
+    public finance editFinance(Long id, financeRequest request){
+
+        finance editFinance = financeRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Finance not found")
+        );
+
+        financeMapper.updateEntity(editFinance, request);
+
+        return financeRepository.save(editFinance);
+    }
+
+    @Transactional(readOnly = true)
+    public List<finance> findAllFinances(){
+
+        return financeRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<finance> findActiveFinances(){
+
+        return financeRepository.findActiveFinances();
+    }
+
+    @Transactional(readOnly = true)
+    public List<finance> findInactiveFinances(){
+
+        return financeRepository.findInactiveFinances();
+    }
+
+    @Transactional(readOnly = true)
+    public finance getFinanceById(Long id){
+
+        return financeRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public finance deactivateFinance(Long id){
+
+        finance editFinance = financeRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Finance not found")
+        );
+
+        if (editFinance.getRemove_date() == null) {
+            editFinance.setRemove_date(LocalDateTime.now());
+        }
+
+        return financeRepository.save(editFinance);
+
+    }
+
+    @Transactional
+    public finance reactivateFinance(Long id){
+
+        finance editFinance = financeRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Finance not found")
+        );
+
+        if (editFinance.getRemove_date() != null) {
+            editFinance.setRemove_date(null);
+        }
+
+        return financeRepository.save(editFinance);
+
+    }
+
 }

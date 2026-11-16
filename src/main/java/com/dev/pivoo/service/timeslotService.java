@@ -6,8 +6,13 @@ import com.dev.pivoo.Repository.clientRepository;
 import com.dev.pivoo.Repository.timeslotRepository;
 import com.dev.pivoo.model.client;
 import com.dev.pivoo.model.timeslot;
-import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class timeslotService {
@@ -23,7 +28,7 @@ public class timeslotService {
     }
 
     @Transactional
-    public timeslot savetimeslot(timeslotRequest request){
+    public timeslot savetimeslot(timeslotRequest request) {
 
         client client = clientRepository.findById(request.id_client())
                 .orElseThrow(() ->
@@ -36,4 +41,87 @@ public class timeslotService {
         return timeslotRepository.save(timeslotfinal);
     }
 
+    @Transactional
+    public void deleteTimeslot(Long id) {
+
+        boolean exists = timeslotRepository.existsById(id);
+        if (exists) {
+            timeslotRepository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Timeslot not found"
+            );
+        }
+    }
+
+    @Transactional
+    public timeslot editTimeslot(Long id, timeslotRequest request) {
+
+        timeslot editTimeslot = timeslotRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Timeslot not found")
+        );
+
+        timeslotMapper.updateEntity(editTimeslot, request);
+
+        return timeslotRepository.save(editTimeslot);
+    }
+
+    @Transactional(readOnly = true)
+    public List<timeslot> findAllTimeslots() {
+
+        return timeslotRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<timeslot> findActiveTimeslots() {
+
+        return timeslotRepository.findActiveTimeslots();
+    }
+
+    @Transactional(readOnly = true)
+    public List<timeslot> findInactiveTimeslots() {
+
+        return timeslotRepository.findInactiveTimeslots();
+    }
+
+    @Transactional(readOnly = true)
+    public timeslot getTimeslotById(Long id) {
+
+        return timeslotRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public timeslot deactivateTimeslot(Long id) {
+
+        timeslot editTimeslot = timeslotRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Timeslot not found")
+        );
+
+        if (editTimeslot.getCancel_date() == null) {
+            editTimeslot.setCancel_date(LocalDateTime.now());
+        }
+
+        return timeslotRepository.save(editTimeslot);
+
+    }
+
+    @Transactional
+    public timeslot reactivateTimeslot(Long id) {
+
+        timeslot editTimeslot = timeslotRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Timeslot not found")
+        );
+
+        if (editTimeslot.getCancel_date() != null) {
+            editTimeslot.setCancel_date(null);
+        }
+
+        return timeslotRepository.save(editTimeslot);
+    }
 }
+

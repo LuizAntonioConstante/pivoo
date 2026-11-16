@@ -1,6 +1,8 @@
 package com.dev.pivoo.Mapper;
 
+import com.dev.pivoo.DTO.requests.planningfinanceRequest;
 import com.dev.pivoo.DTO.requests.timeslotRequest;
+import com.dev.pivoo.model.planningfinance;
 import com.dev.pivoo.model.timeslot;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +19,20 @@ public class timeslotMapper {
         timeslot.setCancel_date(request.cancel_date());
 
         return timeslot;
+    }
+
+    public void updateEntity(timeslot editTimeslot, timeslotRequest request) {
+
+        if (request.price() != null) {
+            editTimeslot.setPrice(request.price());
+        }
+
+        if (request.status() != null) {
+            editTimeslot.setStatus(request.status());
+        }
+
+        if (request.paid() != null) {
+            editTimeslot.setPaid(request.paid());
+        }
     }
 }

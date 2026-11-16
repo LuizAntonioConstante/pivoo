@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -20,5 +22,7 @@ public class planningfinance {
     public Long id;
 
     public String planning;
+
+    public LocalDateTime remove_date;
 }
 

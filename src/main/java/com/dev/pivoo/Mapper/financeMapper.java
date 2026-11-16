@@ -1,6 +1,8 @@
 package com.dev.pivoo.Mapper;
 
 import com.dev.pivoo.DTO.requests.financeRequest;
+import com.dev.pivoo.DTO.requests.financeRequest;
+import com.dev.pivoo.model.finance;
 import com.dev.pivoo.model.finance;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +19,24 @@ public class financeMapper {
 
 
         return finance;
+    }
+    
+    public void updateEntity(finance editFinance, financeRequest request){
+
+        if (request.type() != null){
+            editFinance.setType(request.type());
+        }
+
+        if (request.paidreceived_date() != null){
+            editFinance.setPaidreceived_date(request.paidreceived_date());
+        }
+
+        if (request.amount() != null){
+            editFinance.setAmount(request.amount());
+        }
+
+        if (request.due_date() != null){
+            editFinance.setDue_date(request.due_date());
+        }
     }
 }
