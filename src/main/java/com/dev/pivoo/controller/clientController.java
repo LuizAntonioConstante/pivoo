@@ -18,27 +18,44 @@ public class clientController {
         this.clientService = clientService;
     }
 
+
+    // POST METHOD
     @PostMapping("/save")
-    public ResponseEntity<?> save(
-            @RequestBody clientRequest request
-    )
-    {
+    public ResponseEntity<?> save(@RequestBody clientRequest request){
+
         client client = clientService.saveclient(request);
 
         return ResponseEntity.ok(client);
     }
 
+
+    // PATCH METHOD
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> edit(
-            @PathVariable("id") Long id,
-            @RequestBody clientRequest request
-    ){
+    public ResponseEntity<?> edit(@PathVariable("id") Long id, @RequestBody clientRequest request){
 
         client client = clientService.editClient(id, request);
 
         return ResponseEntity.ok(client);
     }
 
+    @PatchMapping("/deactivate/{id}")
+    public ResponseEntity<?> deactivateClient(@PathVariable("id") Long id) {
+
+        client client = clientService.deactivateClient(id);
+
+        return ResponseEntity.ok(client);
+    }
+
+    @PatchMapping("/reactivate/{id}")
+    public ResponseEntity<?> reactivateClient(@PathVariable("id") Long id) {
+
+        client client = clientService.reactivateClient(id);
+
+        return ResponseEntity.ok(client);
+    }
+
+
+    // DELETE METHOD
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id){
 
@@ -47,6 +64,8 @@ public class clientController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // GET METHOD
     @GetMapping("/list")
     public ResponseEntity<List<client>> listClients() {
 
@@ -82,25 +101,4 @@ public class clientController {
         return ResponseEntity.ok(client);
 
     }
-
-    @PatchMapping("/deactivate/{id}")
-    public ResponseEntity<?> deactivateClient(@PathVariable("id") Long id) {
-
-        client client = clientService.deactivateClient(id);
-
-        return ResponseEntity.ok(client);
-
-    }
-
-    @PatchMapping("/reactivate/{id}")
-    public ResponseEntity<?> reactivateClient(@PathVariable("id") Long id) {
-
-        client client = clientService.reactivateClient(id);
-
-        return ResponseEntity.ok(client);
-
-    }
-
-
-
 }

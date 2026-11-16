@@ -128,7 +128,6 @@ public class financeService {
         }
 
         return financeRepository.save(editFinance);
-
     }
 
     @Transactional
@@ -144,7 +143,45 @@ public class financeService {
         }
 
         return financeRepository.save(editFinance);
-
     }
 
+    @Transactional
+    public finance settleFinance(Long id){
+
+        finance editFinance = financeRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Finance not found")
+        );
+
+        if (editFinance.getPaidreceived_date() != null) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Financial transaction is already settled"
+            );
+        }
+
+        editFinance.setPaidreceived_date(LocalDateTime.now());
+
+        return financeRepository.save(editFinance);
+    }
+
+    @Transactional
+    public finance reopenFinance(Long id){
+
+        finance editFinance = financeRepository.findById(id).orElseThrow(
+                ()-> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Finance not found")
+        );
+
+        if (editFinance.getPaidreceived_date() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Financial transaction is already open"
+            );
+        }
+
+        editFinance.setPaidreceived_date(null);
+
+        return financeRepository.save(editFinance);
+    }
 }

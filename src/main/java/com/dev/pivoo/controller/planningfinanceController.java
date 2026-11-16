@@ -20,6 +20,8 @@ public class planningfinanceController {
         this.planningfinanceService = planningfinanceService;
     }
 
+
+    // POST METHOD
     @PostMapping("/save")
     public ResponseEntity<?> save(
             @RequestBody planningfinanceRequest request
@@ -29,17 +31,36 @@ public class planningfinanceController {
         return ResponseEntity.ok(planningfinance);
     }
 
+
+    // PATCH METHOD
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> edit(
-            @PathVariable("id") Long id,
-            @RequestBody planningfinanceRequest request
-    ){
+    public ResponseEntity<?> edit(@PathVariable("id") Long id, @RequestBody planningfinanceRequest request){
 
         planningfinance planningfinance = planningfinanceService.editPlanningfinance(id, request);
 
         return ResponseEntity.ok(planningfinance);
     }
 
+    @PatchMapping("/deactivate/{id}")
+    public ResponseEntity<?> deactivatePlanningfinance(@PathVariable("id") Long id) {
+
+        planningfinance planningfinance = planningfinanceService.deactivatePlanningfinance(id);
+
+        return ResponseEntity.ok(planningfinance);
+
+    }
+
+    @PatchMapping("/reactivate/{id}")
+    public ResponseEntity<?> reactivatePlanningfinance(@PathVariable("id") Long id) {
+
+        planningfinance planningfinance = planningfinanceService.reactivatePlanningfinance(id);
+
+        return ResponseEntity.ok(planningfinance);
+
+    }
+
+
+    // DELETE METHOD
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id){
 
@@ -48,6 +69,8 @@ public class planningfinanceController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // GET METHOD
     @GetMapping("/list")
     public ResponseEntity<List<planningfinance>> listPlanningfinance() {
 
@@ -79,24 +102,6 @@ public class planningfinanceController {
     public ResponseEntity<?> getClientById(@PathVariable("id") Long id) {
 
         planningfinance planningfinance = planningfinanceService.getplanningfinanceById(id);
-
-        return ResponseEntity.ok(planningfinance);
-
-    }
-
-    @PatchMapping("/deactivate/{id}")
-    public ResponseEntity<?> deactivatePlanningfinance(@PathVariable("id") Long id) {
-
-        planningfinance planningfinance = planningfinanceService.deactivatePlanningfinance(id);
-
-        return ResponseEntity.ok(planningfinance);
-
-    }
-
-    @PatchMapping("/reactivate/{id}")
-    public ResponseEntity<?> reactivatePlanningfinance(@PathVariable("id") Long id) {
-
-        planningfinance planningfinance = planningfinanceService.reactivatePlanningfinance(id);
 
         return ResponseEntity.ok(planningfinance);
 

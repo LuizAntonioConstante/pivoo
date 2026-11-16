@@ -20,6 +20,7 @@ public class timeslotController {
         this.timeslotService = timeslotService;
     }
 
+    // POST METHOD
     @PostMapping("/save")
     public ResponseEntity<?> save(
             @RequestBody timeslotRequest request
@@ -29,6 +30,9 @@ public class timeslotController {
 
         return ResponseEntity.ok(timeslot);
     }
+
+
+    // PATCH METHOD
     @PatchMapping("/edit/{id}")
     public ResponseEntity<?> edit(
             @PathVariable("id") Long id,
@@ -40,14 +44,25 @@ public class timeslotController {
         return ResponseEntity.ok(timeslot);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
+    @PatchMapping("/reactivate/{id}")
+    public ResponseEntity<?> reactivateTimeslot(@PathVariable("id") Long id) {
 
-        timeslotService.deleteTimeslot(id);
+        timeslot timeslot = timeslotService.reactivateTimeslot(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(timeslot);
+
     }
 
+    @PatchMapping("/deactivate/{id}")
+    public ResponseEntity<?> deactivateTimeslot(@PathVariable("id") Long id) {
+
+        timeslot timeslot = timeslotService.deactivateTimeslot(id);
+
+        return ResponseEntity.ok(timeslot);
+
+    }
+
+    // GET METHOD
     @GetMapping("/list")
     public ResponseEntity<List<timeslot>> listTimeslots() {
 
@@ -84,22 +99,14 @@ public class timeslotController {
 
     }
 
-    @PatchMapping("/deactivate/{id}")
-    public ResponseEntity<?> deactivateTimeslot(@PathVariable("id") Long id) {
 
-        timeslot timeslot = timeslotService.deactivateTimeslot(id);
+    // DELETE METHOD
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
 
-        return ResponseEntity.ok(timeslot);
+        timeslotService.deleteTimeslot(id);
 
-    }
-
-    @PatchMapping("/reactivate/{id}")
-    public ResponseEntity<?> reactivateTimeslot(@PathVariable("id") Long id) {
-
-        timeslot timeslot = timeslotService.reactivateTimeslot(id);
-
-        return ResponseEntity.ok(timeslot);
-
+        return ResponseEntity.noContent().build();
     }
 
 }
