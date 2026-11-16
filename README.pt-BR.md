@@ -1,8 +1,8 @@
 <div align="center">
 
-<!-- Coloque o logo em docs/images/logo.png e remova os comentários da linha abaixo.
+
 <img src="docs/images/logo.png" alt="pivoo. logo" width="250">
--->
+
 
 # pivoo.
 

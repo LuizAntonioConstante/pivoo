@@ -1,8 +1,7 @@
 <div align="center">
 
-<!-- Add your logo at docs/images/logo.png, then uncomment the next line.
+
 <img src="docs/images/logo.png" alt="pivoo. logo" width="250">
--->
 
 # pivoo.
 
